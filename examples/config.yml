@@ -1,0 +1,35 @@
+# Stellargen Cassandra Configuration
+# This file contains connection settings for Cassandra database
+
+# List of Cassandra host addresses
+hosts:
+  - 127.0.0.1
+  - localhost
+
+# Keyspace name (will be created if it doesn't exist)
+keyspace: stellargen
+
+# Consistency level for operations
+# Options: ANY, ONE, TWO, THREE, QUORUM, ALL, LOCAL_QUORUM, EACH_QUORUM, LOCAL_ONE
+consistency: QUORUM
+
+# Replication strategy class
+# Options: SimpleStrategy, NetworkTopologyStrategy
+replication_class: SimpleStrategy
+
+# Replication factor (number of replicas)
+replication_factor: 1
+
+# Authentication credentials (leave empty if not required)
+username: ""
+password: ""
+
+# Example with authentication:
+# username: "cassandra"
+# password: "cassandra"
+
+# Example with multiple data centers (NetworkTopologyStrategy):
+# replication_class: NetworkTopologyStrategy
+# data_centers:
+#   dc1: 3
+#   dc2: 2

@@ -1,0 +1,59 @@
+# Cassandra Stress Test Profile for Stellar Data
+# This profile can be used with cassandra-stress tool to test database performance
+# Usage: cassandra-stress user profile=stellar_profile.yaml n=1000000 ops(insert=1)
+
+keyspace: stellargen
+
+keyspace_definition: |
+  CREATE KEYSPACE IF NOT EXISTS stellargen WITH replication = {
+    'class': 'SimpleStrategy',
+    'replication_factor': 1
+  };
+
+table: stars
+
+table_definition: |
+  CREATE TABLE IF NOT EXISTS stellargen.stars (
+    id text PRIMARY KEY,
+    name text,
+    spectral_type text,
+    mass double,
+    radius double,
+    temperature int
+  );
+
+columnspec:
+  - name: id
+    size: uuid()
+    population: seq(1..10000000)
+  
+  - name: name
+    size: uniform(10..30)
+    population: uniform(1..10000000)
+  
+  - name: spectral_type
+    size: fixed(3)
+    cluster: fixed(10)
+  
+  - name: mass
+    size: uniform(0.1..50.0)
+  
+  - name: radius
+    size: uniform(0.1..20.0)
+  
+  - name: temperature
+    size: uniform(2000..50000)
+
+insert:
+  partitions: fixed(1)
+  select: fixed(1)/1
+  batchtype: UNLOGGED
+
+queries:
+  read_star:
+    cql: SELECT * FROM stellargen.stars WHERE id = ?
+    fields: samerow
+  
+  scan_by_spectral_type:
+    cql: SELECT * FROM stellargen.stars WHERE spectral_type = ? ALLOW FILTERING
+    fields: samerow
