@@ -8,7 +8,7 @@ import (
 
 	"djdees/synthetic_stellar_data/config"
 	"djdees/synthetic_stellar_data/generator"
-	"djdees/synthetic_stellar_data/output"
+	"djdees/synthetic_stellar_data/writers"
 )
 
 func main() {
@@ -59,22 +59,22 @@ func main() {
 
 	switch cfg.OutputFormat {
 	case "csv":
-		if err := output.WriteCSV(data, cfg.OutputDir); err != nil {
+		if err := writers.WriteCSV(data, cfg.OutputDir); err != nil {
 			log.Fatalf("Failed to write CSV: %v", err)
 		}
 	case "json":
-		if err := output.WriteJSON(data, cfg.OutputDir); err != nil {
+		if err := writers.WriteJSON(data, cfg.OutputDir); err != nil {
 			log.Fatalf("Failed to write JSON: %v", err)
 		}
 	case "parquet":
-		if err := output.WriteParquet(data, cfg.OutputDir); err != nil {
+		if err := writers.WriteParquet(data, cfg.OutputDir); err != nil {
 			log.Fatalf("Failed to write Parquet: %v", err)
 		}
 	case "cassandra":
 		if cfg.ConfigFile == "" {
 			log.Fatal("Cassandra output requires --config flag with YAML configuration file")
 		}
-		if err := output.WriteToCassandra(data, cfg.ConfigFile); err != nil {
+		if err := writers.WriteToCassandra(data, cfg.ConfigFile); err != nil {
 			log.Fatalf("Failed to write to Cassandra: %v", err)
 		}
 	default:
