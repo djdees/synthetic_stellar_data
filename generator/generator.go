@@ -5,7 +5,7 @@ import (
 	"math"
 	"math/rand"
 
-	"djdees/synthetic_steller_data/models"
+	"djdees/synthetic_stellar_data/models"
 	"github.com/google/uuid"
 )
 
@@ -115,7 +115,7 @@ func generateStar(r *rand.Rand, index int) models.Star {
 func generatePlanet(r *rand.Rand, star models.Star, index int) models.Planet {
 	// Orbital parameters
 	semiMajorAxis := randFloat(r, 0.05, 50.0) // AU
-	orbitalPeriod := 365.25 * math.Sqrt(math.Pow(semiMajorAxis, 3)/star.Mass)
+	orbitalPeriod := 365.25 * math.Sqrt(semiMajorAxis*semiMajorAxis*semiMajorAxis/star.Mass)
 
 	// Planet type determines mass and radius
 	planetType := r.Float64()
@@ -158,7 +158,7 @@ func generatePlanet(r *rand.Rand, star models.Star, index int) models.Planet {
 func generateExoplanet(r *rand.Rand, star models.Star, index int) models.Exoplanet {
 	// Orbital parameters
 	semiMajorAxis := randFloat(r, 0.01, 5.0) // AU (closer range for detectability)
-	orbitalPeriod := 365.25 * math.Sqrt(math.Pow(semiMajorAxis, 3)/star.Mass)
+	orbitalPeriod := 365.25 * math.Sqrt(semiMajorAxis*semiMajorAxis*semiMajorAxis/star.Mass)
 
 	// Mass and radius
 	mass := randFloat(r, 0.5, 500.0)

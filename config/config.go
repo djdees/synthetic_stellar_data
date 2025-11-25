@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-  yaml "gopkg.in/yaml.v3"
+	"gopkg.in/yaml.v3"
 )
 
 // CassandraConfig holds Cassandra connection settings
@@ -224,7 +224,7 @@ func isValidKeyspaceName(name string) bool {
 			}
 		}
 		// Must be alphanumeric or underscore
-		if !((r >= 'a' && r <= 'z') || (r >= 'A' && r <= 'Z') || (r >= '0' && r <= '9') || r == '_') {
+		if (r < 'a' || r > 'z') && (r < 'A' || r > 'Z') && (r < '0' || r > '9') && r != '_' {
 			return false
 		}
 	}
