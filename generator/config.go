@@ -1,7 +1,7 @@
 package generator
 
 import (
-	"djdees/synthetic_steller_data/models"
+	"djdees/synthetic_stellar_data/models"
 )
 
 // Config holds the configuration for data generation

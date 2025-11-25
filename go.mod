@@ -1,4 +1,4 @@
-module djdees/synthetic_steller_data
+module djdees/synthetic_stellar_data
 
 go 1.23
 

@@ -6,9 +6,9 @@ import (
 	"os"
 	"time"
 
-	"djdees/synthetic_steller_data/config"
-	"djdees/synthetic_steller_data/generator"
-	"djdees/synthetic_steller_data/output"
+	"djdees/synthetic_stellar_data/config"
+	"djdees/synthetic_stellar_data/generator"
+	"djdees/synthetic_stellar_data/output"
 )
 
 func main() {

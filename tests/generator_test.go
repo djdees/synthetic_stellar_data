@@ -3,7 +3,7 @@ package tests
 import (
 	"testing"
 
-	"djdees/synthetic_steller_data/generator"
+	"djdees/synthetic_stellar_data/generator"
 )
 
 func TestGenerateAllBasic(t *testing.T) {
